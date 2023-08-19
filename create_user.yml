@@ -1,0 +1,13 @@
+---
+- name: user creation play
+  hosts: serverc.lab.example.com
+  vars_files:
+    user_list.yml
+  tasks:
+    - name: user creation
+      ansible.builtin.user:
+        name: "{{ item }}"
+        group: developer
+        state: present
+      loop: "{{ users }}"
+      when: item=='greg'
